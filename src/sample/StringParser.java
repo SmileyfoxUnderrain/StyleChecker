@@ -42,7 +42,9 @@ public class StringParser {
 
             for (String retval : splittedLine) {
 
-                if (retval.contains("[ERROR]")) retval = retval.substring(8, retval.length());
+                if (retval.contains("[ERROR]")) {
+                    retval = retval.substring(8, retval.length());
+                }
 
                 if (!retval.equals("..")) {
                     if (level < splittedLine.length - 1) {
@@ -60,13 +62,15 @@ public class StringParser {
                             parentNode = currentNode;
                         } else {
                             parentNode = parentNode.getChildren().get(pos);
-                            System.out.println("Existing node set as parent:" + parentNode.toString());
+                            System.out.println("Existing node set as parent:"
+                                    + parentNode.toString());
                         }
 
                     } else if (level == splittedLine.length - 1) {
 
                         System.out.println("Error: " + retval);
-                        System.out.println("Adding an error to parent node " + parentNode.toString());
+                        System.out.println("Adding an error to parent node "
+                                + parentNode.toString());
                         parentNode.getChildren().add(new TreeItem<>(retval));
                     }
                 }

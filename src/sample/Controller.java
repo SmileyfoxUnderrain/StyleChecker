@@ -20,11 +20,11 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public static void setSTAGE(Stage STAGE) {
-        Controller.STAGE = STAGE;
+    public static void setSTAGE(Stage stage) {
+        Controller.STAGE = stage;
     }
 
-    public static Stage STAGE;
+    private static Stage STAGE;
 
     @FXML
     private TextField textField1;
