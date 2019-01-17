@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 
 public class Controller implements Initializable {
@@ -41,7 +42,13 @@ public class Controller implements Initializable {
     @FXML
     public void selectPath(ActionEvent event) {
 
+        String defaultPath = "C:\\";
+
+        Preferences node = Preferences.userRoot().node("CS61bSC");
+        defaultPath = node.get("path", "C:\\");
+
         DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File(defaultPath));
         directoryChooser.setTitle("Select path");
 
         File f = directoryChooser.showDialog(STAGE);
@@ -51,6 +58,7 @@ public class Controller implements Initializable {
             path += "\\";
         }
 
+        node.put("path", path);
         textField1.setText(path);
 
         System.out.println("Path = " + path);
