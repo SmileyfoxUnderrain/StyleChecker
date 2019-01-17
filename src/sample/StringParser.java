@@ -5,11 +5,20 @@ import javafx.scene.control.TreeItem;
 public class StringParser {
 
     private TreeItem<String> rootTreeNode = new TreeItem<>("Root");
+    private int totalErrorsCount;
+    private int parserErrorsCount;
     private boolean assignedRoot = false;
 
     public TreeItem<String> getRootTreeNode() {
         rootTreeNode.setExpanded(true);
         return rootTreeNode;
+    }
+    public int getTotalErrorsCount(){
+        return totalErrorsCount;
+    }
+
+    public int getParserErrorsCount() {
+        return parserErrorsCount;
     }
 
     public int containsString(TreeItem<String> node, String str) {
@@ -35,7 +44,9 @@ public class StringParser {
     public boolean parse(String line) {
         if (line.startsWith("[ERROR]")) {
 
+            parserErrorsCount++;
             int level = 0;
+
             String[] splittedLine = line.split("\\\\", 0);
             TreeItem<String> currentNode;
             TreeItem<String> parentNode = rootTreeNode;
@@ -76,6 +87,10 @@ public class StringParser {
                 }
                 level++;
             }
+        }else if(line.startsWith("Checkstyle ends with")){
+            String[] words = line.split(" ");
+            totalErrorsCount = Integer.parseInt(words[3]);
+            System.out.println("found "+totalErrorsCount+"error(s) by Checkstyle");
         }
         return true;
     }

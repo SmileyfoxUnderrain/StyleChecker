@@ -69,14 +69,24 @@ public class Controller implements Initializable {
 
     @FXML
     public void btnCheckPressed(ActionEvent event) {
+
         System.out.println("Check clicked");
         ProcessLauncher pl = new ProcessLauncher();
-        pl.launch(textField1.getText());
+        StringParser p = pl.launch(textField1.getText());
 
-        TreeItem<String> item = pl.getRootTreeNode();
+        TreeItem<String> item = p.getRootTreeNode();
         item.setExpanded(true);
+
         viewField.setRoot(item);
         viewField.setShowRoot(false);
+
+        if(p.getParserErrorsCount()!=p.getTotalErrorsCount()){
+            System.out.println("Not all errors shown!");
+        }
+
+
+
+
 
 
     }

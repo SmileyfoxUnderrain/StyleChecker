@@ -10,12 +10,13 @@ import java.io.InputStreamReader;
 public class ProcessLauncher {
 
     private TreeItem<String> rootTreeNode;
+    private StringParser parser;
 
     public TreeItem<String> getRootTreeNode() {
         return rootTreeNode;
     }
 
-    public void launch(String path) {
+    public StringParser launch(String path) {
         try {
             Process process = new ProcessBuilder(
                     "java",
@@ -30,18 +31,19 @@ public class ProcessLauncher {
             InputStreamReader isr = new InputStreamReader(is, "Cp1251");
             BufferedReader br = new BufferedReader(isr);
             String line;
-            StringParser p = new StringParser();
+            parser = new StringParser();
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                p.parse(line);
+                parser.parse(line);
             }
-            rootTreeNode = p.getRootTreeNode();
+//            rootTreeNode = parser.getRootTreeNode();
+
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return parser;
     }
 
 }
