@@ -3,9 +3,11 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -37,6 +39,9 @@ public class Controller implements Initializable {
 
     @FXML
     private TreeView viewField;
+
+    @FXML
+    private Label bottomLabel;
 
 
     @FXML
@@ -80,14 +85,17 @@ public class Controller implements Initializable {
         viewField.setRoot(item);
         viewField.setShowRoot(false);
 
+
+
+        String labelText = "Errors found: "+p.getTotalErrorsCount()+", shown: "+p.getParserErrorsCount();
+
         if(p.getParserErrorsCount()!=p.getTotalErrorsCount()){
             System.out.println("Not all errors shown!");
+            labelText+=" Not all errors are shown!";
+            bottomLabel.setTextFill(Color.RED);
         }
 
-
-
-
-
+        bottomLabel.setText(labelText);
 
     }
 
