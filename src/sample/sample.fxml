@@ -19,13 +19,19 @@
             </AnchorPane>
             <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#selectPath" prefWidth="100.0" text="Select path">
                <HBox.margin>
-                  <Insets top="2.0" />
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </HBox.margin>
+               <opaqueInsets>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </opaqueInsets>
             </Button>
             <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnCheckPressed" prefWidth="100.0" text="Check">
                <HBox.margin>
-                  <Insets top="2.0" />
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </HBox.margin>
+               <opaqueInsets>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </opaqueInsets>
             </Button>
          </children>
       </HBox>
@@ -36,4 +42,3 @@
       </AnchorPane>
    </children>
 </VBox>
-
