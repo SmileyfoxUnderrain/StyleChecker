@@ -12,10 +12,17 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("CS61b StyleChecker");
-        primaryStage.setScene(new Scene(root, 720, 360));
+
+        Scene scene = new Scene(root, 720, 360);
+
+        primaryStage.setScene(scene);
+
+        scene.getStylesheets().add(Main.class.getResource("modena_dark.css").toExternalForm());
+
         primaryStage.show();
 
         Controller.setSTAGE(primaryStage);
+        Controller.setSCENE(scene);
     }
 
 

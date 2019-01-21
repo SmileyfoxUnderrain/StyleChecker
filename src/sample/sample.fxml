@@ -38,7 +38,7 @@
       </HBox>
       <AnchorPane maxHeight="1.0E7" prefHeight="1.0E7">
          <children>
-            <TreeView fx:id="viewField" layoutX="136.0" layoutY="33.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TreeView fx:id="viewField" editable="true" layoutX="136.0" layoutY="33.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <HBox maxHeight="20.0" minHeight="20.0" prefHeight="20.0">

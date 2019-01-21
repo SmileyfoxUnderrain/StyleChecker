@@ -3,10 +3,8 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -19,22 +17,11 @@ import java.util.prefs.Preferences;
 
 public class Controller implements Initializable {
 
+    private static Stage STAGE;
+    private static Scene SCENE;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-
-    public static void setSTAGE(Stage stage) {
-        Controller.STAGE = stage;
-    }
-
-    private static Stage STAGE;
-
-    @FXML
-    private TextField textField1;
-
-
-    public TreeView getViewField() {
-        return viewField;
     }
 
     @FXML
@@ -43,6 +30,20 @@ public class Controller implements Initializable {
     @FXML
     private Label bottomLabel;
 
+    @FXML
+    private TextField textField1;
+
+    public static void setSTAGE(Stage stage) {
+        Controller.STAGE = stage;
+    }
+
+    public static void setSCENE(Scene SCENE) {
+        Controller.SCENE = SCENE;
+    }
+
+    public TreeView getViewField() {
+        return viewField;
+    }
 
     @FXML
     public void selectPath(ActionEvent event) {
@@ -66,9 +67,10 @@ public class Controller implements Initializable {
         node.put("path", path);
         textField1.setText(path);
 
+        System.out.println("Check clicked");
         System.out.println("Path = " + path);
 
-        btnCheckPressed(event);
+        btnCheckPressed(new ActionEvent());
     }
 
 
@@ -76,6 +78,7 @@ public class Controller implements Initializable {
     public void btnCheckPressed(ActionEvent event) {
 
         System.out.println("Check clicked");
+
         ProcessLauncher pl = new ProcessLauncher();
         StringParser p = pl.launch(textField1.getText());
 
@@ -85,18 +88,15 @@ public class Controller implements Initializable {
         viewField.setRoot(item);
         viewField.setShowRoot(false);
 
-
-
         String labelText = "Errors found: "+p.getTotalErrorsCount()+", shown: "+p.getParserErrorsCount();
 
         if(p.getParserErrorsCount()!=p.getTotalErrorsCount()){
             System.out.println("Not all errors shown!");
             labelText+=" Not all errors are shown!";
-            bottomLabel.setTextFill(Color.RED);
+//            bottomLabel.setTextFill(Color.RED);
         }
 
         bottomLabel.setText(labelText);
-
     }
 
 
