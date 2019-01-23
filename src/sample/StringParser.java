@@ -2,6 +2,10 @@ package sample;
 
 import javafx.scene.control.TreeItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class StringParser {
 
     private TreeItem<String> rootTreeNode = new TreeItem<>("Root");
@@ -48,17 +52,31 @@ public class StringParser {
             int level = 0;
 
             String[] splittedLine = line.split("\\\\", 0);
+
+            List<String> splittedLineList = Arrays.asList(splittedLine);
+            int listSize = splittedLineList.size()-1;
+            String lastLine = splittedLineList.get(listSize);
+            String leftpart = lastLine.substring(0,lastLine.indexOf(":"));
+            String rightpart = lastLine.substring(lastLine.indexOf(":")+1);
+
+            ArrayList<String> splittedLineArrayList = new ArrayList<>();
+            splittedLineArrayList.addAll(splittedLineList);
+
+            splittedLineArrayList.remove(listSize);
+            splittedLineArrayList.add(leftpart);
+            splittedLineArrayList.add(rightpart);
+
             TreeItem<String> currentNode;
             TreeItem<String> parentNode = rootTreeNode;
 
-            for (String retval : splittedLine) {
+            for (String retval : splittedLineArrayList) {
 
                 if (retval.contains("[ERROR]")) {
-                    retval = retval.substring(8, retval.length());
+                    retval = retval.substring(8);
                 }
 
                 if (!retval.equals("..")) {
-                    if (level < splittedLine.length - 1) {
+                    if (level < splittedLineArrayList.size() - 1) {
 
                         System.out.println("parent node: " + parentNode.toString());
                         int pos = containsString(parentNode, retval);
@@ -77,7 +95,7 @@ public class StringParser {
                                     + parentNode.toString());
                         }
 
-                    } else if (level == splittedLine.length - 1) {
+                    } else if (level == splittedLineArrayList.size() - 1) {
 
                         System.out.println("Error: " + retval);
                         System.out.println("Adding an error to parent node "
